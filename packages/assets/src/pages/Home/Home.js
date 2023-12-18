@@ -13,7 +13,7 @@ export default function Home() {
   const {dispatch} = useStore();
 
   return (
-    <Page title="Dashboard">
+    <Page title="Home" fullWidth>
       <Layout>
         <Layout.Section>
           <SettingToggle
@@ -25,7 +25,12 @@ export default function Home() {
             }}
             enabled={enabled}
           >
-            <TextStyle>Our app is {enabled ? 'enabled' : 'disabled'} on your store</TextStyle>
+            <TextStyle>
+              App status is{' '}
+              <span style={{fontWeight: 600, color: '#000'}}>
+                {enabled ? 'enabled' : 'disabled'}
+              </span>{' '}
+            </TextStyle>
           </SettingToggle>
         </Layout.Section>
       </Layout>

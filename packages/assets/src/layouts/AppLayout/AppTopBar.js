@@ -30,6 +30,8 @@ export default function AppTopBar({isNavOpen, toggleOpenNav}) {
 
   const {sheet: newsSheet, openSheet: openNewsSheet} = useConfirmSheet({Content: AppNewsSheet});
 
+  const userMenuMarkup = <TopBar.UserMenu name="Avada" initials="A" />;
+
   return (
     <TopBar
       secondaryMenu={
@@ -39,18 +41,8 @@ export default function AppTopBar({isNavOpen, toggleOpenNav}) {
               <Icon source={isNavOpen ? MobileCancelMajor : MobileHamburgerMajor} />
             </Button>
             <img alt="Avada App Name" src={LOGO_URL} width={LOGO_WIDTH} />
-            <DisplayText size="small">
-              <Link url="/" removeUnderline>
-                App Name
-              </Link>
-            </DisplayText>
-            {isLocal && (
-              <Stack alignment="center">
-                <Button plain url="/dev_zone" icon={BugMajor} />
-              </Stack>
-            )}
           </div>
-          <div className="Avada-TopBar__Icons">
+          {/* <div className="Avada-TopBar__Icons">
             <Stack alignment="center" spacing="extraTight">
               <Button plain url={docLink} external>
                 <Thumbnail source={InfoIcon} size="small" alt="" />
@@ -59,7 +51,7 @@ export default function AppTopBar({isNavOpen, toggleOpenNav}) {
                 <Thumbnail source={NotificationIcon} size="small" alt="" />
               </Button>
             </Stack>
-          </div>
+          </div> */}
           {isShopUpgradable(shop) && (
             <Button url="/subscription">
               <Stack alignment="center">
@@ -71,6 +63,7 @@ export default function AppTopBar({isNavOpen, toggleOpenNav}) {
           {newsSheet}
         </div>
       }
+      userMenu={userMenuMarkup}
     />
   );
 }

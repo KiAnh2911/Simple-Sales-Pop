@@ -17,13 +17,13 @@
     react-screentype-hook "^1.0.18"
     react-step-wizard "^5.3.6"
 
-"@avada/console@^0.0.27-alpha.4":
-  version "0.0.27-alpha.4"
-  resolved "https://registry.avada.io/@avada%2fconsole/-/console-0.0.27-alpha.4.tgz#3ec3b67d75aca72cf76adffcf2b0d7c1ed642d6a"
-  integrity sha512-0sNOOjGunnw/7+IMJNr7QSJdvEOrjF3uyipe6mSzuuc4IMdQROZNsqhpuPPhvk8otVd1amAFpoARAbZgWlhwcg==
+"@avada/console@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.avada.io/@avada%2fconsole/-/console-1.0.0.tgz#82a9ad9a8cc25d373b93139a14713f2ef2fddfe8"
+  integrity sha512-EOnpbsxqdADNcsFikC2VIi0+5MMkmjLw/sG3zfBIkLz9YU0BECh5zs6HD8JQ7PTToHs2ECmu2VMN3ScdCQXu1g==
   dependencies:
     commander "^3.0.2"
-    firebase-admin "^9.9.0"
+    firebase-admin "^11.5.0"
     fs-extra "^8.1.0"
     http-proxy "^1.18.0"
     js-yaml "^3.13.1"
@@ -5649,15 +5649,10 @@ camelcase@^6.3.0:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-6.3.0.tgz#5685b95eb209ac9c0c177467778c9c84df58ba9a"
   integrity sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==
 
-caniuse-lite@^1.0.30001219:
-  version "1.0.30001244"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001244.tgz#a6dc49ad5fa02d81d04373ec3f5ceabc3da06abf"
-  integrity sha512-Wb4UFZPkPoJoKKVfELPWytRzpemjP/s0pe22NriANru1NoI+5bGNxzKtk7edYL8rmCWTfQO8eRiF0pn1Dqzx7Q==
-
-caniuse-lite@^1.0.30001370:
-  version "1.0.30001373"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001373.tgz#2dc3bc3bfcb5d5a929bec11300883040d7b4b4be"
-  integrity sha512-pJYArGHrPp3TUqQzFYRmP/lwJlj8RCbVe3Gd3eJQkAV8SAC6b19XS9BjMvRdvaS8RMkaTN8ZhoHP6S1y8zzwEQ==
+caniuse-lite@^1.0.30001219, caniuse-lite@^1.0.30001370:
+  version "1.0.30001570"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001570.tgz"
+  integrity sha512-+3e0ASu4sw1SWaoCtvPeyXp+5PsjigkSt8OXZbF9StH5pQWbxEjLAZE3n8Aup5udop1uRiKA7a4utUk/uoSpUw==
 
 capital-case@^1.0.4:
   version "1.0.4"
@@ -12588,6 +12583,11 @@ mkdirp@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
+
+moment@^2.29.4:
+  version "2.29.4"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
+  integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
 
 move-concurrently@^1.0.1:
   version "1.0.1"
