@@ -1,6 +1,8 @@
 import {Card, Layout, Page, ResourceItem, ResourceList, Stack, TextStyle} from '@shopify/polaris';
 import React, {useState} from 'react';
 import {NotificationPopup} from '../../components/NotificationPopup/NotificationPopup';
+import useFetchApi from '../../hooks/api/useFetchApi';
+import moment from 'moment';
 
 /**
  * Just render a sample page
@@ -8,48 +10,16 @@ import {NotificationPopup} from '../../components/NotificationPopup/Notification
  * @return {React.ReactElement}
  * @constructor
  */
+
 export default function Notifications() {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [sortValue, setSortValue] = useState('DATE_MODIFIED_DESC');
 
-  const items = [
-    {
-      id: '1',
-      firstName: 'John Doe',
-      city: 'New York',
-      country: 'United States',
-      productName: 'Puffer Jacket With Hidden Hood',
-      productImage:
-        'https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=600'
-    },
-    {
-      id: '5',
-      firstName: 'John Doe',
-      city: 'New York',
-      country: 'United States',
-      productName: 'Puffer Jacket With Hidden Hood',
-      productImage:
-        'https://images.pexels.com/photos/5730956/pexels-photo-5730956.jpeg?auto=compress&cs=tinysrgb&w=600'
-    },
-    {
-      id: '2',
-      firstName: 'John Doe 2',
-      city: 'New York 2',
-      country: 'United States 2',
-      productName: 'Puffer Jacket With Hidden Hood 2',
-      productImage:
-        'https://images.pexels.com/photos/19090/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=600'
-    },
-    {
-      id: '3',
-      firstName: 'John Doe 3',
-      city: 'New York 3',
-      country: 'United States 3',
-      productName: 'Puffer Jacket With Hidden Hood 3',
-      productImage:
-        'https://images.pexels.com/photos/2562992/pexels-photo-2562992.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-    }
-  ];
+  const {data: valueSetting} = useFetchApi({
+    url: '/settings'
+  });
+
+  const {data: items, loading} = useFetchApi({url: '/notifications'});
 
   const resourceName = {
     singular: 'product',
@@ -63,14 +33,35 @@ export default function Notifications() {
 
   const promotedBulkActions = [
     {
-      content: 'Complete',
-      onAction: () => {}
-    },
-    {
       content: 'Delete',
       onAction: () => {}
     }
   ];
+
+  const renderItem = item => {
+    const {id, firstName, city, country, productName, timestamp, productImage} = item;
+
+    return (
+      <ResourceItem id={id}>
+        <Stack distribution={'equalSpacing'}>
+          <NotificationPopup
+            key={id}
+            city={city}
+            country={country}
+            firstName={firstName}
+            productImage={productImage}
+            productName={productName}
+            timestamp={timestamp}
+            settings={valueSetting}
+          />
+          <Stack vertical>
+            <TextStyle>From {moment(timestamp).format('MMM D')}</TextStyle>
+            <TextStyle>{moment(timestamp).format('YYYY')}</TextStyle>
+          </Stack>
+        </Stack>
+      </ResourceItem>
+    );
+  };
 
   return (
     <Page title="Notifications" subtitle="List of sales notifcation from Shopify" fullWidth>
@@ -78,6 +69,7 @@ export default function Notifications() {
         <Layout.Section>
           <Card>
             <ResourceList
+              loading={loading}
               resourceName={resourceName}
               items={items}
               renderItem={renderItem}
@@ -94,26 +86,5 @@ export default function Notifications() {
         </Layout.Section>
       </Layout>
     </Page>
-  );
-}
-
-function renderItem(item) {
-  const {id, firstName, city, country, productName, timestamp, productImage} = item;
-
-  return (
-    <ResourceItem id={id}>
-      <Stack distribution={'equalSpacing'}>
-        <NotificationPopup
-          key={id}
-          city={city}
-          country={country}
-          firstName={firstName}
-          productImage={productImage}
-          productName={productName}
-          timestamp={timestamp}
-        />
-        <TextStyle>From March 8, 2021</TextStyle>
-      </Stack>
-    </ResourceItem>
   );
 }

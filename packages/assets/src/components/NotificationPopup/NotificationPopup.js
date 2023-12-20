@@ -10,10 +10,10 @@ export const NotificationPopup = ({
   productName = 'Puffer Jacket With Hidden Hood',
   timestamp = `${new Date()}`,
   productImage = 'http://paris.mageplaza.com/images/shop/single/big-1.jpg',
-  settings = {hideTimeAgo: true, truncateProductName: true}
+  settings = {hideTimeAgo: false, truncateProductName: true}
 }) => {
-  console.log('timestamp', timestamp);
   const {hideTimeAgo, truncateProductName} = settings;
+
   return (
     <div className="Avava-SP__Wrapper fadeInUp animated">
       <div className="Avava-SP__Inner">
@@ -30,12 +30,12 @@ export const NotificationPopup = ({
                 {firstName} in {city}, {country}
               </div>
               <div className={'Avada-SP__Subtitle'}>
-                purchased {truncateProductName ? truncateString(productName, 16) : productName}
+                Purchased {truncateProductName ? truncateString(productName, 16) : productName}
               </div>
               <div className={'Avada-SP__Footer'}>
-                {hideTimeAgo && `${moment(timestamp).fromNow()}`}
+                {hideTimeAgo ? '' : `${moment(timestamp).fromNow()}`}
                 <span className="uni-blue">
-                  <i className="fa fa-check" aria-hidden="true" /> by Avada
+                  <i className="fa fa-check" aria-hidden="fasle" /> by Avada
                 </span>
               </div>
             </div>

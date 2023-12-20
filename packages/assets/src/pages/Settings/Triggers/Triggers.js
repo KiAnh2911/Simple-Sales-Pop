@@ -1,9 +1,7 @@
-import {Card, Layout, Select, TextField, TextStyle} from '@shopify/polaris';
 import React from 'react';
+import {Card, Layout, Select, TextField, TextStyle} from '@shopify/polaris';
 
-const Restriction = ({settings, onChangeInput}) => {
-  const {includedUrls, excludedUrls, allowShow} = settings;
-
+const Triggers = ({settings, onChangeInput}) => {
   const options = [
     {
       label: 'All pages',
@@ -13,7 +11,7 @@ const Restriction = ({settings, onChangeInput}) => {
           <TextField
             label="Excluded pages"
             multiline={4}
-            value={excludedUrls}
+            value={settings.excludedUrls}
             onChange={value => onChangeInput('excludedUrls', value)}
             helpText="Page URLs NOT to the pop-up (separted by new lines)"
           />
@@ -29,7 +27,7 @@ const Restriction = ({settings, onChangeInput}) => {
             <TextField
               label="Included pages"
               multiline={4}
-              value={includedUrls}
+              value={settings.includedUrls}
               onChange={value => onChangeInput('includedUrls', value)}
               helpText="Page URLs to the pop-up (separted by new lines)"
             />
@@ -38,7 +36,7 @@ const Restriction = ({settings, onChangeInput}) => {
             <TextField
               label="Excluded pages"
               multiline={4}
-              value={excludedUrls}
+              value={settings.excludedUrls}
               onChange={value => onChangeInput('excludedUrls', value)}
               helpText="Page URLs NOT to the pop-up (separted by new lines)"
             />
@@ -53,13 +51,13 @@ const Restriction = ({settings, onChangeInput}) => {
       <Select
         options={options}
         onChange={value => onChangeInput('allowShow', value)}
-        value={allowShow}
+        value={settings.allowShow}
       />
       <div style={{marginBlock: '15px'}}>
-        {options.find(option => option.value == allowShow).page}
+        {options.find(option => option.value == settings.allowShow).page}
       </div>
     </Card.Section>
   );
 };
 
-export default Restriction;
+export default Triggers;

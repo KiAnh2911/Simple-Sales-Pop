@@ -2,7 +2,7 @@
 
 name = "first-app"
 client_id = "2553c564c448965dd4a0a83b85f4ec3e"
-application_url = "https://shadow-racks-temp-deadly.trycloudflare.com/auth/shopify"
+application_url = "https://fleet-screens-activation-noon.trycloudflare.com/auth/shopify"
 embedded = true
 
 [access_scopes]
@@ -11,9 +11,9 @@ use_legacy_install_flow = true
 
 [auth]
 redirect_urls = [
-  "https://shadow-racks-temp-deadly.trycloudflare.com/auth/shopify/callback",
-  "https://shadow-racks-temp-deadly.trycloudflare.com/authSa/shopify/callback",
-  "https://shadow-racks-temp-deadly.trycloudflare.com/auth/shopify/embed/callback",
+  "https://fleet-screens-activation-noon.trycloudflare.com/auth/shopify/callback",
+  "https://fleet-screens-activation-noon.trycloudflare.com/authSa/shopify/callback",
+  "https://fleet-screens-activation-noon.trycloudflare.com/auth/shopify/embed/callback",
   "https://localhost:3000/auth/shopify/callback",
   "https://localhost:3000/authSa/shopify/callback",
   "https://localhost:3000/auth/shopify/embed/callback"

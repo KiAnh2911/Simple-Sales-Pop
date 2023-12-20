@@ -77,7 +77,7 @@ export default function AppNavigation() {
           {
             url: '/settings',
             icon: SettingsMajor,
-            label: 'settings',
+            label: 'Settings',
             selected: location.pathname === getUrl('/settings'),
             onClick: () => {
               history.push('/settings');
