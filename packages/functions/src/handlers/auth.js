@@ -1,12 +1,13 @@
-import App from 'koa';
-import 'isomorphic-fetch';
 import {contentSecurityPolicy, shopifyAuth} from '@avada/shopify-auth';
+import appConfig from '@functions/config/app';
 import shopifyConfig from '@functions/config/shopify';
-import render from 'koa-ejs';
-import path from 'path';
 import createErrorHandler from '@functions/middleware/errorHandler';
 import firebase from 'firebase-admin';
-import appConfig from '@functions/config/app';
+import 'isomorphic-fetch';
+import App from 'koa';
+import render from 'koa-ejs';
+import path from 'path';
+import * as installationServices from '../services/installationServices';
 
 if (firebase.apps.length === 0) {
   firebase.initializeApp();
@@ -43,6 +44,7 @@ app.use(
     },
     hostName: appConfig.baseUrl,
     isEmbeddedApp: true,
+    afterInstall: installationServices.afterInstall,
     afterThemePublish: ctx => {
       // Publish assets when theme is published or changed here
       return (ctx.body = {
@@ -58,3 +60,11 @@ app.on('error', err => {
 });
 
 export default app;
+
+// "firstName": "Adolf",
+// "city": "Port Austynview",
+// "productName": "Refined Frozen Table",
+// "country": "Sierra Leone",
+// "productId": "d011e005-7ec3-439a-9278-53f01e8f449a",
+// "timestamp": "2023-01-06T20:10:51.762Z",
+// "productImage": "https://loremflickr.com/640/480?lock=2187133854941184"

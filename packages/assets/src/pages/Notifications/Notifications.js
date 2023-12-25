@@ -1,8 +1,18 @@
-import {Card, Layout, Page, ResourceItem, ResourceList, Stack, TextStyle} from '@shopify/polaris';
+import {
+  Card,
+  Layout,
+  Page,
+  Pagination,
+  ResourceItem,
+  ResourceList,
+  Stack,
+  TextStyle
+} from '@shopify/polaris';
 import React, {useState} from 'react';
 import {NotificationPopup} from '../../components/NotificationPopup/NotificationPopup';
 import useFetchApi from '../../hooks/api/useFetchApi';
 import moment from 'moment';
+import usePaginate from '../../hooks/api/usePaginate';
 
 /**
  * Just render a sample page
@@ -13,13 +23,17 @@ import moment from 'moment';
 
 export default function Notifications() {
   const [selectedProducts, setSelectedProducts] = useState([]);
-  const [sortValue, setSortValue] = useState('DATE_MODIFIED_DESC');
+  const [sortValue, setSortValue] = useState('createdAt:desc');
 
   const {data: valueSetting} = useFetchApi({
     url: '/settings'
   });
 
-  const {data: items, loading} = useFetchApi({url: '/notifications'});
+  const {data: items, loading, nextPage, prevPage, pageInfo} = usePaginate({
+    url: '/notifications',
+    defaultLimit: 1
+  });
+  console.log('pageInfo', pageInfo);
 
   const resourceName = {
     singular: 'product',
@@ -27,8 +41,8 @@ export default function Notifications() {
   };
 
   const sortOptions = [
-    {label: 'Newest update', value: 'DATE_MODIFIED_DESC'},
-    {label: 'Oldest update', value: 'DATE_MODIFIED_ASC'}
+    {label: 'Newest update', value: 'createdAt:desc'},
+    {label: 'Oldest update', value: 'createdAt:asc'}
   ];
 
   const promotedBulkActions = [
@@ -43,7 +57,7 @@ export default function Notifications() {
 
     return (
       <ResourceItem id={id}>
-        <Stack distribution={'equalSpacing'}>
+        <Stack distribution={'equalSpacing'} alignment="leading">
           <NotificationPopup
             key={id}
             city={city}
@@ -54,8 +68,8 @@ export default function Notifications() {
             timestamp={timestamp}
             settings={valueSetting}
           />
-          <Stack vertical>
-            <TextStyle>From {moment(timestamp).format('MMM D')}</TextStyle>
+          <Stack vertical alignment="trailing" spacing="extraTight">
+            <TextStyle>From {moment(timestamp).format('MMM D')} ,</TextStyle>
             <TextStyle>{moment(timestamp).format('YYYY')}</TextStyle>
           </Stack>
         </Stack>
@@ -83,6 +97,16 @@ export default function Notifications() {
               }}
             />
           </Card>
+        </Layout.Section>
+        <Layout.Section>
+          <Stack distribution="center">
+            <Pagination
+              hasPrevious={pageInfo.hasPre}
+              onPrevious={prevPage}
+              hasNext={pageInfo.hasNext}
+              onNext={nextPage}
+            />
+          </Stack>
         </Layout.Section>
       </Layout>
     </Page>

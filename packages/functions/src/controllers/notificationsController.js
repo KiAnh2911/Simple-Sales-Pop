@@ -3,11 +3,12 @@ import {getListNotificationRepo} from '../repositories/notificationsRepository';
 
 export async function getListNotification(ctx) {
   const shopId = getCurrentShop(ctx);
-  const {limit, sort} = ctx.query;
-  const notification = await getListNotificationRepo({shopId, limit, sort});
+  const {limit, sort, page} = ctx.query;
+  const {notifications, pageInfo} = await getListNotificationRepo({shopId, limit, sort, page});
 
   ctx.body = {
-    data: notification,
+    data: notifications,
+    pageInfo,
     success: true
   };
 }

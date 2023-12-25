@@ -1,4 +1,5 @@
 import {Firestore} from '@google-cloud/firestore';
+import {defaultSettings} from '../helpers/defaultSettings';
 
 /**
  * @documentation
@@ -45,6 +46,16 @@ export async function updateSettingsRepo(settings) {
     const settingDoc = settingDocs.docs[0];
 
     return {id: settingDoc.id, ...settingDoc.data()};
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+export async function addDefaultSettings(shopData) {
+  try {
+    const shopId = shopData.id;
+    return collection.add({...defaultSettings, shopId});
   } catch (error) {
     console.error(error);
     return null;
