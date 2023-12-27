@@ -44,3 +44,16 @@ declare interface IStoreState {
   subscription: Subscription;
   toast?: {content: string; error: boolean};
 }
+
+declare interface Settings {
+  position: string;
+  hideTimeAgo: boolean;
+  truncateProductName: boolean;
+  displayDuration: number;
+  firstDelay: number;
+  popsInterval: number;
+  maxPopsDisplay: number;
+  includedUrls: string;
+  excludedUrls: string;
+  allowShow: string;
+}

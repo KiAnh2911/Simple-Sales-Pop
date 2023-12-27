@@ -1,0 +1,116 @@
+.Avada-SP__Wrapper {
+  width: 290px;
+  position: fixed;
+  z-index: 99;
+  color: #333;
+}
+.Avada-SP__Wrapper--bottom-left {
+  bottom: 20px;
+  left: 90px;
+}
+.Avada-SP__Wrapper--bottom-right {
+  bottom: 20px;
+  right: 20px;
+}
+.Avada-SP__Wrapper--top-left {
+  top: 20px;
+  left: 20px;
+}
+.Avada-SP__Wrapper--top-right {
+  top: 20px;
+  right: 20px;
+}
+
+.Avada-SP__LinkWrapper {
+  color: #333;
+}
+@media screen and (max-width: 575px) {
+  .Avada-SP__Wrapper {
+    left: 15px;
+  }
+}
+.Avada-SP__Wrapper .Avada-SP__Inner {
+  position: relative;
+}
+.Avada-SP__Wrapper .Avada-SP__Inner:hover img {
+  opacity: 1;
+  visibility: visible;
+  top: -120px;
+}
+.Avada-SP__Wrapper .Avada-SP__Container {
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  -webkit-box-shadow: 3px 0 5px rgba(5, 5, 5, 0.07);
+  -moz-box-shadow: 3px 0 5px rgba(5, 5, 5, 0.07);
+  box-shadow: 3px 0 5px rgba(5, 5, 5, 0.07);
+  background: #ffffff;
+  padding: 5px;
+  position: relative;
+}
+.Avada-SP__Wrapper .Avada-SP__Image {
+  height: 65px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  color: #43495a;
+  font-size: 55px;
+  width: 65px;
+  display: inline-block;
+  text-align: center;
+  vertical-align: top;
+  font-weight: bold;
+  line-height: 69px;
+  background-size: cover;
+  background-position: center;
+}
+.Avada-SP__Wrapper .Avada-SP__Content {
+  display: inline-block;
+  width: calc(100% - 75px);
+  width: -moz-calc(100% - 75px);
+  width: -webkit-calc(100% - 75px);
+  color: #000;
+  font-size: 13px;
+  padding-left: 15px;
+}
+.Avada-SP__Wrapper .Avada-SP__Content .Avada-SP__Title {
+  margin-bottom: 5px;
+}
+.Avada-SP__Wrapper .Avada-SP__Content .Avada-SP__Subtitle {
+  margin-bottom: 0;
+  font-weight: bold;
+  //color: #8b93a8;
+}
+.Avada-SP__Wrapper .Avada-SP__Content .Avada-SP__Subtitle--truncated {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-weight: bold;
+}
+.Avada-SP__Wrapper .Avada-SP__Content .Avada-SP__Footer {
+  line-height: 16px;
+  margin-top: 5px;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+}
+.Avada-SP__Wrapper .Avada-SP__Content .uni-blue {
+  color: #2196f3;
+}
+.Avada-SP__ClosePopup {
+  position: absolute;
+  top: 0px;
+  right: 8px;
+  cursor: pointer;
+  width: 10px;
+  height: 10px;
+}
+
+// .Avada-SalePop__OuterWrapper {
+//   visibility: visible;
+// }
+
+.fadeOut {
+  display: none;
+}

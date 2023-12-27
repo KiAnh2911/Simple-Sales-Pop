@@ -31,9 +31,8 @@ export default function Notifications() {
 
   const {data: items, loading, nextPage, prevPage, pageInfo} = usePaginate({
     url: '/notifications',
-    defaultLimit: 1
+    defaultLimit: 10
   });
-  console.log('pageInfo', pageInfo);
 
   const resourceName = {
     singular: 'product',

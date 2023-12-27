@@ -1,21 +1,22 @@
 import {getShopById, getShopByShopifyDomain} from '@avada/shopify-auth';
-import Shopify from 'shopify-api-node';
 import {resolveAll} from '../helpers/resolveAll';
-import {addNotificationServices} from './shopifyServices';
+import {initShopify} from '../helpers/utils/initShopify';
+import {createWebhookOrder} from '../helpers/utils/webhook';
 import {addDefaultSettings} from '../repositories/settingsRepository';
+import {getListOrderShopifyGrapQl} from './shopifyGraphQl';
 
 export async function afterInstall(ctx) {
   try {
     const shopDomain = ctx.state.shopify.shop;
     const {id} = await getShopByShopifyDomain(shopDomain);
-    const shopData = await getShopById(id);
+    const shop = await getShopById(id);
+    const shopify = initShopify(shop);
 
-    const shopify = new Shopify({
-      accessToken: shopData.accessToken,
-      shopName: shopData.shopifyDomain
-    });
-
-    await resolveAll([addNotificationServices({shopify, shopData}), addDefaultSettings(shopData)]);
+    await resolveAll([
+      getListOrderShopifyGrapQl(shop),
+      addDefaultSettings(shop),
+      createWebhookOrder(shopify)
+    ]);
   } catch (error) {
     console.error('error', error);
   }

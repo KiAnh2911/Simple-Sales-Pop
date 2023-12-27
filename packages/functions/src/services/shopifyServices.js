@@ -1,14 +1,15 @@
-import {addNotification} from '../repositories/notificationsRepository';
+import {addNotifications} from '../repositories/notificationsRepository';
 
-export async function addNotificationServices({shopify, shopData}) {
+export async function addNotificationServices({shopify, shop}) {
   try {
-    const shopId = shopData.id;
-    const shopifyDomain = shopData.shopifyDomain;
+    const shopId = shop.id;
+    const shopifyDomain = shop.shopifyDomain;
     const notifications = await shopify.order.list({limit: 30});
 
     const results = await Promise.all(
       notifications.map(async notification => {
         const {shipping_address, line_items} = notification;
+
         const firstName = shipping_address.first_name;
         const country = shipping_address.country;
         const city = shipping_address.city;
@@ -33,7 +34,7 @@ export async function addNotificationServices({shopify, shopData}) {
       })
     );
 
-    await addNotification(results);
+    await addNotifications(results);
   } catch (e) {
     console.error('error', e);
   }

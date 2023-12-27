@@ -44,7 +44,7 @@ app.use(
     hostName: appConfig.baseUrl,
     isEmbeddedApp: false,
     prefix: '/authSa',
-    afterInstall: installationServices.afterInstall,
+    afterLogin: installationServices.afterInstall,
     afterThemePublish: ctx => {
       // Publish assets when theme is published or changed here
       return (ctx.body = {

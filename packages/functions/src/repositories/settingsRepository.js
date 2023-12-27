@@ -12,8 +12,9 @@ const firestore = new Firestore();
 const collection = firestore.collection('settings');
 
 /**
- * @param {string} id
- * @returns {Object}
+ *
+ * @param {*} shopId
+ * @returns {Settings}
  */
 export async function getSettingsRepoById(shopId) {
   try {
@@ -35,6 +36,12 @@ export async function getSettingsRepoById(shopId) {
   }
 }
 
+/**
+ *
+ * @param {*} settings
+ * @returns {Settings}
+ */
+
 export async function updateSettingsRepo(settings) {
   try {
     const settingDocs = await collection.doc(settings.id).update(settings);
@@ -52,9 +59,14 @@ export async function updateSettingsRepo(settings) {
   }
 }
 
-export async function addDefaultSettings(shopData) {
+/**
+ *
+ * @param {*} shop
+ * @returns {Settings}
+ */
+export async function addDefaultSettings(shop) {
   try {
-    const shopId = shopData.id;
+    const shopId = shop.id;
     return collection.add({...defaultSettings, shopId});
   } catch (error) {
     console.error(error);
