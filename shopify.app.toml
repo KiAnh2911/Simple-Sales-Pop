@@ -2,7 +2,7 @@
 
 name = "simple sale pop"
 client_id = "31e32703ad9063d42ff2611e60d06893"
-application_url = "https://monster-fixed-programmers-ideal.trycloudflare.com/auth/shopify"
+application_url = "https://acknowledged-musicians-administered-clarke.trycloudflare.com/auth/shopify"
 embedded = true
 
 [access_scopes]
@@ -11,9 +11,9 @@ use_legacy_install_flow = true
 
 [auth]
 redirect_urls = [
-  "https://monster-fixed-programmers-ideal.trycloudflare.com/auth/shopify/callback",
-  "https://monster-fixed-programmers-ideal.trycloudflare.com/authSa/shopify/callback",
-  "https://monster-fixed-programmers-ideal.trycloudflare.com/auth/shopify/embed/callback",
+  "https://acknowledged-musicians-administered-clarke.trycloudflare.com/auth/shopify/callback",
+  "https://acknowledged-musicians-administered-clarke.trycloudflare.com/authSa/shopify/callback",
+  "https://acknowledged-musicians-administered-clarke.trycloudflare.com/auth/shopify/embed/callback",
   "https://localhost:3000/auth/shopify/callback",
   "https://localhost:3000/authSa/shopify/callback",
   "https://localhost:3000/auth/shopify/embed/callback"

@@ -1,5 +1,6 @@
 import {presentDataFromDoc} from '@avada/firestore-utils';
 import {Firestore} from '@google-cloud/firestore';
+import {resolveAll} from '../helpers/resolveAll';
 
 /**
  * @documentation
@@ -30,7 +31,8 @@ export async function getListNotificationRepo(
     const {docs: notifications} = await query.get();
 
     const hasPre = page > 1;
-    const hasNext = notificationDocs.length === Number(page) ? false : true;
+    const hasNext =
+      Math.ceil(notificationDocs.length / Number(limit)) === Number(page) ? false : true;
 
     return {
       notifications: notifications.map(doc => presentDataFromDoc(doc)),
@@ -81,4 +83,15 @@ export async function limitedToListNotificationsShopId(shop, notification) {
   } catch (error) {
     console.log('Error Limited To List Notifications: ', error);
   }
+}
+
+export async function deleteManyNotification(notificationsId) {
+  const batch = firestore.batch();
+
+  notificationsId.forEach(id => {
+    const notificationRef = collection.doc(id);
+    batch.delete(notificationRef);
+  });
+
+  await batch.commit();
 }

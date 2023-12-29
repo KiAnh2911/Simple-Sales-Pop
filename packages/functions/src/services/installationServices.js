@@ -4,6 +4,7 @@ import {initShopify} from '../helpers/utils/initShopify';
 import {createWebhookOrder} from '../helpers/utils/webhook';
 import {addDefaultSettings} from '../repositories/settingsRepository';
 import {getListOrderShopifyGrapQl} from './shopifyGraphQl';
+import {addNotificationServices} from './shopifyServices';
 
 export async function afterInstall(ctx) {
   try {
@@ -13,7 +14,8 @@ export async function afterInstall(ctx) {
     const shopify = initShopify(shop);
 
     await resolveAll([
-      getListOrderShopifyGrapQl(shop),
+      // getListOrderShopifyGrapQl(shop),
+      addNotificationServices({shopify, shop}),
       addDefaultSettings(shop),
       createWebhookOrder(shopify)
     ]);

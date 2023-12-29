@@ -13,6 +13,7 @@ import {NotificationPopup} from '../../components/NotificationPopup/Notification
 import useFetchApi from '../../hooks/api/useFetchApi';
 import moment from 'moment';
 import usePaginate from '../../hooks/api/usePaginate';
+import useDeleteApi from '../../hooks/api/useDeleteApi';
 
 /**
  * Just render a sample page
@@ -23,16 +24,19 @@ import usePaginate from '../../hooks/api/usePaginate';
 
 export default function Notifications() {
   const [selectedProducts, setSelectedProducts] = useState([]);
-  const [sortValue, setSortValue] = useState('createdAt:desc');
+  const [sortValue, setSortValue] = useState('createdAt:asc');
 
   const {data: valueSetting} = useFetchApi({
     url: '/settings'
   });
 
-  const {data: items, loading, nextPage, prevPage, pageInfo} = usePaginate({
+  const {data: items, loading, nextPage, prevPage, pageInfo, onQueryChange} = usePaginate({
     url: '/notifications',
-    defaultLimit: 10
+    defaultLimit: 10,
+    defaultSort: sortValue
   });
+
+  const {handleDelete, deleting} = useDeleteApi({url: '/notifications'});
 
   const resourceName = {
     singular: 'product',
@@ -47,7 +51,12 @@ export default function Notifications() {
   const promotedBulkActions = [
     {
       content: 'Delete',
-      onAction: () => {}
+      onAction: async () => {
+        await handleDelete(selectedProducts),
+          await onQueryChange('page', 1, true),
+          setSelectedProducts([]);
+      },
+      loading: deleting
     }
   ];
 
@@ -91,9 +100,10 @@ export default function Notifications() {
               onSelectionChange={setSelectedProducts}
               sortOptions={sortOptions}
               onSortChange={selected => {
+                onQueryChange('sort', selected, true);
                 setSortValue(selected);
-                console.log(`Sort option changed to ${selected}.`);
               }}
+              sortValue={sortValue}
             />
           </Card>
         </Layout.Section>

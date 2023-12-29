@@ -1,37 +1,12 @@
 import {addNotifications} from '../repositories/notificationsRepository';
+import {getNotification} from './notificationServices';
 
 export async function addNotificationServices({shopify, shop}) {
   try {
-    const shopId = shop.id;
-    const shopifyDomain = shop.shopifyDomain;
     const notifications = await shopify.order.list({limit: 30});
 
     const results = await Promise.all(
-      notifications.map(async notification => {
-        const {shipping_address, line_items} = notification;
-
-        const firstName = shipping_address.first_name;
-        const country = shipping_address.country;
-        const city = shipping_address.city;
-        const product_id = line_items[0].product_id;
-        const products = await shopify.product.get(product_id);
-        const productName = products.title;
-        const productId = product_id;
-        const timestamp = notification.created_at;
-        const productImage = products.images[0].src;
-
-        return {
-          firstName,
-          country,
-          city,
-          productName,
-          productId,
-          timestamp,
-          productImage,
-          shopifyDomain,
-          shopId
-        };
-      })
+      notifications.map(notification => getNotification(shopify, shop.id, notification))
     );
 
     await addNotifications(results);
