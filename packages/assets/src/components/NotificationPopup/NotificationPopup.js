@@ -33,7 +33,7 @@ export const NotificationPopup = ({
                 Purchased {truncateProductName ? truncateString(productName, 16) : productName}
               </div>
               <div className={'Avada-SP__Footer'}>
-                {hideTimeAgo ? '' : `${moment(timestamp).fromNow()}`}
+                <span>{hideTimeAgo ? '' : `${moment(timestamp).fromNow()}`}</span>
                 <span className="uni-blue">
                   <i className="fa fa-check" aria-hidden="fasle" /> by Avada
                 </span>

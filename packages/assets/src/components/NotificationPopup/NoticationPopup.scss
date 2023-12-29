@@ -79,13 +79,14 @@
   font-weight: bold;
 }
 .Avava-SP__Wrapper .Avada-SP__Content .Avada-SP__Footer {
+  display: flex;
+  justify-content: space-between;
   font-size: 10px;
   line-height: 16px;
   margin-top: 5px;
 }
 .Avava-SP__Wrapper .Avada-SP__Content .uni-blue {
   color: #2196f3;
-  border-left: 1px solid #e2e4e9;
   margin-left: 8px;
   padding-left: 8px;
 }
