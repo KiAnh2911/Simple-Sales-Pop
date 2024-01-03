@@ -1,6 +1,6 @@
 import {getShopByShopifyDomain} from '@avada/shopify-auth';
 import {initShopify} from '../helpers/utils/initShopify';
-import {limitedToListNotificationsShopId} from '../repositories/notificationsRepository';
+import {addNotification} from '../repositories/notificationsRepository';
 import {getNotification} from '../services/notificationServices';
 
 export async function listenNewOrder(ctx) {
@@ -11,7 +11,7 @@ export async function listenNewOrder(ctx) {
     const shopify = initShopify(shop);
 
     const notification = await getNotification(shopify, shop.id, orderData);
-    await limitedToListNotificationsShopId(shop, notification);
+    await addNotification(notification);
 
     return (ctx.body = {
       success: true

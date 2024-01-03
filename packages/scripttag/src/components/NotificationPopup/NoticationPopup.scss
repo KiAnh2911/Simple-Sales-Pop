@@ -37,7 +37,7 @@
   visibility: visible;
   top: -120px;
 }
-.Avada-SP__Wrapper .Avada-SP__Container {
+.Avada-SP__Wrapper .Avava-SP__Container {
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   border-radius: 20px;
@@ -48,7 +48,7 @@
   padding: 5px;
   position: relative;
 }
-.Avada-SP__Wrapper .Avada-SP__Image {
+.Avada-SP__Wrapper .Avava-SP__Image {
   height: 65px;
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
@@ -78,20 +78,23 @@
 }
 .Avada-SP__Wrapper .Avada-SP__Content .Avada-SP__Subtitle {
   margin-bottom: 0;
-  font-weight: bold;
-  //color: #8b93a8;
+  font-size: 12px;
+  font-weight: 600;
 }
 .Avada-SP__Wrapper .Avada-SP__Content .Avada-SP__Subtitle--truncated {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  font-weight: bold;
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 600;
 }
 .Avada-SP__Wrapper .Avada-SP__Content .Avada-SP__Footer {
   line-height: 16px;
   margin-top: 5px;
   color: #333;
+  font-size: 12px;
   display: flex;
   justify-content: space-between;
 }
@@ -105,12 +108,4 @@
   cursor: pointer;
   width: 10px;
   height: 10px;
-}
-
-// .Avada-SalePop__OuterWrapper {
-//   visibility: visible;
-// }
-
-.fadeOut {
-  display: none;
 }

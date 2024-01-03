@@ -1,39 +1,40 @@
 import React from 'react';
-import './NotificationPopup.scss';
-import PropTypes from 'prop-types';
+import './NoticationPopup.scss';
+import moment from 'moment';
 
 const NotificationPopup = ({
-  firstName = 'Someone',
+  firstName = 'John Doe',
   city = 'New York',
   country = 'United States',
-  productName = 'Iphone 15 pro max 256GB',
-  timestamp = 'a day ago',
-  productImage = 'https://newphone15.com/wp-content/uploads/2023/04/apple-iphone-15-pro-max-1-500x429.png',
-  settings = {hideTimeAgo: false, truncateProductName: false, position: 'bottom-left'}
+  productName = 'Puffer Jacket With Hidden Hood',
+  timestamp = `${new Date()}`,
+  productImage = 'http://paris.mageplaza.com/images/shop/single/big-1.jpg',
+  settings = {hideTimeAgo: false, truncateProductName: true, position: 'bottom-left'}
 }) => {
-  const {hideTimeAgo, truncateProductName, position} = settings;
   return (
-    <div className={`Avada-SP__Wrapper Avada-SP__Wrapper--${position}`}>
-      <div className="Avada-SP__Inner">
-        <div className="Avada-SP__Container">
-          <a href="#" className={'Avada-SP__LinkWrapper'}>
+    <div className={`Avada-SP__Wrapper Avada-SP__Wrapper--${settings.position}`}>
+      <div className="Avava-SP__Inner">
+        <div className="Avava-SP__Container">
+          <a href="#" className={'Avava-SP__LinkWrapper'}>
             <div
-              className="Avada-SP__Image"
+              className="Avava-SP__Image"
               style={{
                 backgroundImage: `url(${productImage})`
               }}
-            />
+            ></div>
             <div className="Avada-SP__Content">
               <div className={'Avada-SP__Title'}>
-                {firstName || 'Someone'} in {city}, {country}
+                {firstName} in {city}, {country}
               </div>
-              <div className={`Avada-SP__Subtitle${truncateProductName ? '--truncated' : ''}`}>
+              <div
+                className={`Avada-SP__Subtitle${settings.truncateProductName ? '--truncated' : ''}`}
+              >
                 Purchased {productName}
               </div>
               <div className={'Avada-SP__Footer'}>
-                {hideTimeAgo ? '' : timestamp}
+                <span>{settings.hideTimeAgo ? '' : `${moment(timestamp).fromNow()}`}</span>
                 <span className="uni-blue">
-                  <i className="fa fa-check" aria-hidden="true" /> by Avada
+                  <i className="fa fa-check" aria-hidden="fasle" /> by Avada
                 </span>
               </div>
             </div>
@@ -54,18 +55,6 @@ const NotificationPopup = ({
       </div>
     </div>
   );
-};
-
-NotificationPopup.propTypes = {
-  firstName: PropTypes.string,
-  city: PropTypes.string,
-  country: PropTypes.string,
-  productName: PropTypes.string,
-  productImage: PropTypes.string,
-  timestamp: PropTypes.string,
-  truncateProductName: PropTypes.bool,
-  hideTimeAgo: PropTypes.bool,
-  position: PropTypes.string
 };
 
 export default NotificationPopup;

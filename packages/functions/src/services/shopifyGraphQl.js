@@ -1,7 +1,7 @@
 import {addNotifications} from '../repositories/notificationsRepository';
 const axios = require('axios');
 
-export async function getListOrderShopifyGrapQl(shop) {
+export async function syncNotifications(shop) {
   try {
     const {id: shopId, shopifyDomain, accessToken} = shop;
     const query = `{

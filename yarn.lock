@@ -3966,6 +3966,13 @@
   dependencies:
     lodash "^4.17.21"
 
+"@koa/cors@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@koa/cors/-/cors-5.0.0.tgz#0029b5f057fa0d0ae0e37dd2c89ece315a0daffd"
+  integrity sha512-x/iUDjcS90W69PryLDIMgFyV21YLTnG9zOpPXS7Bkt2b8AsY3zZsIpOLBkYr9fBcF3HbkKaER5hOBZLfpLgYNw==
+  dependencies:
+    vary "^1.1.2"
+
 "@kwsites/file-exists@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@kwsites/file-exists/-/file-exists-1.1.1.tgz#ad1efcac13e1987d8dbaf235ef3be5b0d96faa99"
@@ -13977,6 +13984,11 @@ moment@^2.29.4:
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
   integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
 
+moment@^2.30.1:
+  version "2.30.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.30.1.tgz#f8c91c07b7a786e30c59926df530b4eac96974ae"
+  integrity sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==
+
 move-concurrently@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/move-concurrently/-/move-concurrently-1.0.1.tgz#be2c005fda32e0b29af1f05d7c4b33214c701f92"
@@ -15252,11 +15264,6 @@ preact-html-converter@^0.4.2:
   integrity sha512-s55EUubBPDEhFKSNoXe/DfV6afnAVcc+0v4YrwaKSGBA0bWTVz876X8NJxVmtmqdFsU/1ITJq2oZEtXdWKYdeQ==
   dependencies:
     "@types/parse5" "^5.0.0"
-
-preact-lazy@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/preact-lazy/-/preact-lazy-0.0.3.tgz#c226c9f21e28dbb8dbd291193e7f90a86f5beb47"
-  integrity sha512-0/UpDxSXpSWdiOix6VJQAoe570ajiTyR5PqOmfRR1ttoZgX9KeCSOHXmThuRAq8AGYMUt/+RBudTsWUhwvZ0yA==
 
 preact@^10.3.2:
   version "10.19.3"

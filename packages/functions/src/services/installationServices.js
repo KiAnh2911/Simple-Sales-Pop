@@ -3,8 +3,9 @@ import {resolveAll} from '../helpers/resolveAll';
 import {initShopify} from '../helpers/utils/initShopify';
 import {createWebhookOrder} from '../helpers/utils/webhook';
 import {addDefaultSettings} from '../repositories/settingsRepository';
-import {getListOrderShopifyGrapQl} from './shopifyGraphQl';
-import {addNotificationServices} from './shopifyServices';
+// import * as shopifyGraphQl from './shopifyGraphQl';
+import * as shopifyServices from './shopifyServices';
+import {createScripttag} from '../helpers/utils/createScripttag';
 
 export async function afterInstall(ctx) {
   try {
@@ -12,12 +13,12 @@ export async function afterInstall(ctx) {
     const {id} = await getShopByShopifyDomain(shopDomain);
     const shop = await getShopById(id);
     const shopify = initShopify(shop);
-
     await resolveAll([
-      // getListOrderShopifyGrapQl(shop),
-      addNotificationServices({shopify, shop}),
+      // shopifyGraphQl.syncNotifications(shop),
+      shopifyServices.syncNotifications({shopify, shop}),
       addDefaultSettings(shop),
-      createWebhookOrder(shopify)
+      createWebhookOrder(shopify),
+      createScripttag(shopify)
     ]);
   } catch (error) {
     console.error('error', error);

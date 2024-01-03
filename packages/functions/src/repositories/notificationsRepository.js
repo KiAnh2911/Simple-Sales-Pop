@@ -35,7 +35,14 @@ export async function getListNotificationRepo(
       Math.ceil(notificationDocs.length / Number(limit)) === Number(page) ? false : true;
 
     return {
-      notifications: notifications.map(doc => presentDataFromDoc(doc)),
+      notifications: notifications.map(notification => {
+        const timestamp = notification.data().timestamp.toDate();
+        return {
+          id: notification.id,
+          ...notification.data(),
+          timestamp
+        };
+      }),
       pageInfo: {
         hasPre,
         hasNext
@@ -51,7 +58,7 @@ export async function addNotifications(notifications) {
     const addNotification = notifications.map(notification => collection.add(notification));
     return Promise.all(addNotification);
   } catch (error) {
-    console.error('error', error);
+    console.error('Error Add Notifications', error);
   }
 }
 
@@ -60,28 +67,7 @@ export async function addNotification(notification) {
     const addedNotification = await collection.add(notification);
     return addedNotification;
   } catch (error) {
-    console.error('error', error);
-  }
-}
-
-export async function limitedToListNotificationsShopId(shop, notification) {
-  try {
-    const count = await collection
-      .where('shopId', '==', shop.id)
-      .count()
-      .get();
-
-    if (count.data().count === 30) {
-      const {docs} = await collection
-        .where('shopId', '==', shop.id)
-        .orderBy('timestamp', 'asc')
-        .get();
-      await collection.doc(docs[0].id).update(notification);
-    } else {
-      await addNotification(notification);
-    }
-  } catch (error) {
-    console.log('Error Limited To List Notifications: ', error);
+    console.error('Error Add Notification', error);
   }
 }
 

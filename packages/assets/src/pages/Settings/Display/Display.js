@@ -74,6 +74,7 @@ export const Display = ({settings, onChangeInput}) => {
               label="Maximum of popups"
               value={settings.maxPopsDisplay}
               onChange={value => onChangeInput('maxPopsDisplay', Number(value))}
+              suffix="pop(s)"
               helpText="The maximum number of popups are allowed to show after page loading. Maximum number is 80"
             />
           </FormLayout.Group>
