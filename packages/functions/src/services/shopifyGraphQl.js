@@ -57,7 +57,7 @@ export async function syncNotifications(shop) {
         firstName: shippingAddress.firstName || '',
         city: shippingAddress.city || '',
         country: shippingAddress.country || '',
-        timestamp: createdAt || new Date(),
+        timestamp: new Date(createdAt) || new Date(),
         productName: product.title,
         productId: Number(product.id.split('/').slice(-1)[0]) || '',
         productImage: image.url || '',

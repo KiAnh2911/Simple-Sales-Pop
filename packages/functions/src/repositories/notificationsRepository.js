@@ -1,6 +1,4 @@
-import {presentDataFromDoc} from '@avada/firestore-utils';
 import {Firestore} from '@google-cloud/firestore';
-import {resolveAll} from '../helpers/resolveAll';
 
 /**
  * @documentation
@@ -8,13 +6,14 @@ import {resolveAll} from '../helpers/resolveAll';
  * Only use one repository to connect to one collection
  * do not connect more than one collection from one repository
  */
+
 const firestore = new Firestore();
 /** @type CollectionReference */
 const collection = firestore.collection('notifications');
 
 export async function getListNotificationRepo(
   shopId,
-  {sort = 'createdAt:asc', limit = 30, page = 1}
+  {sort = 'createdAt:desc', limit = 30, page = 1}
 ) {
   try {
     let query = collection.where('shopId', '==', shopId);
@@ -37,6 +36,7 @@ export async function getListNotificationRepo(
     return {
       notifications: notifications.map(notification => {
         const timestamp = notification.data().timestamp.toDate();
+
         return {
           id: notification.id,
           ...notification.data(),

@@ -24,7 +24,7 @@ import useDeleteApi from '../../hooks/api/useDeleteApi';
 
 export default function Notifications() {
   const [selectedProducts, setSelectedProducts] = useState([]);
-  const [sortValue, setSortValue] = useState('createdAt:asc');
+  const [sortValue, setSortValue] = useState('createdAt:desc');
 
   const {data: valueSetting} = useFetchApi({
     url: '/settings'

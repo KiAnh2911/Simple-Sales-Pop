@@ -7,7 +7,7 @@ export async function getNotification(shopify, id, data) {
       firstName: data.billing_address.first_name || '',
       city: data.billing_address.city || '',
       country: data.billing_address.country || '',
-      timestamp: new Date(data.created_at) || '',
+      timestamp: new Date(data.created_at) || new Date(),
       productName: data.line_items[0].title || '',
       productId: data.line_items[0].product_id || null,
       productImage: product.image.src || '',
