@@ -11,10 +11,10 @@ export default class DisplayManager {
   }
 
   async initialize({notifications, settings}) {
-    this.notifications = notifications;
-    this.settings = settings;
-    this.insertContainer();
-    this.displayPopups(notifications, settings);
+    if (this.isShowPopupUrls(settings)) {
+      this.insertContainer();
+      this.displayPopups(notifications, settings);
+    }
   }
 
   async displayPopups(notifications, settings) {
@@ -32,6 +32,22 @@ export default class DisplayManager {
     }
   }
 
+  isShowPopupUrls(settings) {
+    const {includedUrls, excludedUrls, allowShow} = settings;
+    const currentUrl = window.location.href;
+
+    const listIncludedUrls = includedUrls.split('\n').map(url => url.trim());
+    const listExcludedUrls = excludedUrls.split('\n').map(url => url.trim());
+
+    if (allowShow === 'all' && !listExcludedUrls.includes(currentUrl)) {
+      return true;
+    }
+    if (allowShow === 'specific' && listIncludedUrls.includes(currentUrl)) {
+      return true;
+    }
+    return false;
+  }
+
   fadeRemove() {
     const container = document.querySelector('#Avada-SalePop');
     container.remove();
@@ -45,7 +61,10 @@ export default class DisplayManager {
   display({notification, settings}) {
     const container = document.querySelector('#Avada-SalePop');
     container.style.display = 'block';
-    render(<NotificationPopup {...notification} settings={settings} />, container);
+    render(
+      <NotificationPopup {...notification} settings={settings} closePopup={this.fadeRemove} />,
+      container
+    );
   }
 
   insertContainer() {

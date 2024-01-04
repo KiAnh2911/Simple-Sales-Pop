@@ -9,7 +9,8 @@ const NotificationPopup = ({
   productName = 'Puffer Jacket With Hidden Hood',
   timestamp = `${new Date()}`,
   productImage = 'http://paris.mageplaza.com/images/shop/single/big-1.jpg',
-  settings = {hideTimeAgo: false, truncateProductName: true, position: 'bottom-left'}
+  settings = {hideTimeAgo: false, truncateProductName: true, position: 'bottom-left'},
+  closePopup = () => {}
 }) => {
   return (
     <div className={`Avada-SP__Wrapper Avada-SP__Wrapper--${settings.position}`}>
@@ -39,13 +40,7 @@ const NotificationPopup = ({
               </div>
             </div>
           </a>
-          <div
-            className="Avada-SP__ClosePopup"
-            onClick={() => {
-              const container = document.querySelector('#Avada-SalePop');
-              container.remove();
-            }}
-          >
+          <div className="Avada-SP__ClosePopup" onClick={closePopup}>
             <img
               src="https://boostsales.apps.avada.io/76c920a85ebd5fba8dd6568494f8021c.svg"
               alt=""
