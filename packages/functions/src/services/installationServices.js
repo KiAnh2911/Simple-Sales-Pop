@@ -13,13 +13,14 @@ export async function afterInstall(ctx) {
     const {id} = await getShopByShopifyDomain(shopDomain);
     const shop = await getShopById(id);
     const shopify = initShopify(shop);
-
+    const scriptTags = await shopify.scriptTag.list();
+    console.log('scriptTags', scriptTags);
     await resolveAll([
       // shopifyGraphQl.syncNotifications(shop),
       shopifyServices.syncNotifications({shopify, shop}),
       addDefaultSettings(shop),
-      createWebhookOrder(shopify),
-      createScripttag(shopify)
+      createWebhookOrder(shopify)
+      // createScripttag(shopify)
     ]);
   } catch (error) {
     console.error('error', error);

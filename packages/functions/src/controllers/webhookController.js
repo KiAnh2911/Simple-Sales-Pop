@@ -7,6 +7,7 @@ export async function listenNewOrder(ctx) {
   try {
     const shopifyDomain = ctx.get('X-Shopify-Shop-Domain');
     const orderData = ctx.req.body;
+    console.log('orderData', orderData);
     const shop = await getShopByShopifyDomain(shopifyDomain);
     const shopify = initShopify(shop);
 

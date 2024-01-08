@@ -44,15 +44,7 @@ export async function getSettingsRepoById(shopId) {
 
 export async function updateSettingsRepo(settings) {
   try {
-    const settingDocs = await collection.doc(settings.id).update(settings);
-
-    if (settingDocs.exists) {
-      return null;
-    }
-
-    const settingDoc = settingDocs.docs[0];
-
-    return {id: settingDoc.id, ...settingDoc.data()};
+    return await collection.doc(settings.id).update(settings);
   } catch (error) {
     console.error(error);
     return null;

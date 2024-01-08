@@ -23,9 +23,7 @@ export default class DisplayManager {
       this.display({notification: notifications[i], settings: settings});
       await delay(settings.displayDuration);
       this.fadeOut();
-      if (i < settings.maxPopsDisplay - 1) {
-        await delay(settings.popsInterval);
-      }
+      await delay(settings.popsInterval);
       if (i === settings.maxPopsDisplay - 1) {
         this.fadeRemove();
       }

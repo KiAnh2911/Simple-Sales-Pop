@@ -1,5 +1,6 @@
 import {
   Card,
+  EmptyState,
   Layout,
   Page,
   Pagination,
@@ -60,6 +61,15 @@ export default function Notifications() {
     }
   ];
 
+  const emptyStateMarkup = (
+    <Card>
+      <EmptyState
+        heading="No notifications yet"
+        image="https://cdn.shopify.com/s/files/1/0262/4071/2726/files/emptystate-files.png"
+      />
+    </Card>
+  );
+
   const renderItem = item => {
     const {id, firstName, city, country, productName, timestamp, productImage} = item;
 
@@ -104,6 +114,7 @@ export default function Notifications() {
                 setSortValue(selected);
               }}
               sortValue={sortValue}
+              emptyState={emptyStateMarkup}
             />
           </Card>
         </Layout.Section>

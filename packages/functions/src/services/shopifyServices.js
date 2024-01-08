@@ -1,13 +1,12 @@
-import {resolveAll} from '../helpers/resolveAll';
 import {addNotifications} from '../repositories/notificationsRepository';
 
 export async function syncNotifications({shopify, shop}) {
   try {
-    const [orders, products] = await resolveAll([
-      shopify.order.list({limit: 30}),
-      shopify.product.list()
-    ]);
-
+    const orders = await shopify.order.list({limit: 30});
+    const listProductIds = orders.map(order => order.line_items[0].product_id);
+    const products = await shopify.product.list({
+      ids: [...new Set(listProductIds)].toString()
+    });
     const notifications = orders.map(order => {
       const lineItems = order?.line_items[0];
       const shippingAddress = order?.shipping_address;
