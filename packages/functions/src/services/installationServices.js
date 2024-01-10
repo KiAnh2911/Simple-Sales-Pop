@@ -26,7 +26,7 @@ export async function uninstallService(ctx) {
     const shopDomain = ctx.state.shopify.shop;
     const {id: shopId} = await getShopByShopifyDomain(shopDomain);
 
-    await resolveAll([deleteNotifications(shopId)], deleteSetting(shopId));
+    await resolveAll([deleteNotifications(shopId), deleteSetting(shopId)]);
 
     return (ctx.body = {
       success: true
