@@ -1,8 +1,8 @@
 import Shopify from 'shopify-api-node';
 
-export function initShopify(shop) {
+export function initShopify({shopifyDomain, accessToken}) {
   return new Shopify({
-    shopName: shop.shopifyDomain,
-    accessToken: shop.accessToken
+    shopName: shopifyDomain,
+    accessToken: accessToken
   });
 }

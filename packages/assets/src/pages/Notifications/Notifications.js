@@ -120,12 +120,16 @@ export default function Notifications() {
         </Layout.Section>
         <Layout.Section>
           <Stack distribution="center">
-            <Pagination
-              hasPrevious={pageInfo.hasPre}
-              onPrevious={prevPage}
-              hasNext={pageInfo.hasNext}
-              onNext={nextPage}
-            />
+            {items.length > 0 ? (
+              <Pagination
+                hasPrevious={pageInfo.hasPre}
+                onPrevious={prevPage}
+                hasNext={pageInfo.hasNext}
+                onNext={nextPage}
+              />
+            ) : (
+              ''
+            )}
           </Stack>
         </Layout.Section>
       </Layout>

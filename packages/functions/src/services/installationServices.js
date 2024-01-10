@@ -1,28 +1,41 @@
-import {getShopById, getShopByShopifyDomain} from '@avada/shopify-auth';
+import {getShopByShopifyDomain} from '@avada/shopify-auth';
 import {resolveAll} from '../helpers/resolveAll';
 import {initShopify} from '../helpers/utils/initShopify';
 import {createWebhookOrder} from '../helpers/utils/webhook';
-import {addDefaultSettings} from '../repositories/settingsRepository';
-// import * as shopifyGraphQl from './shopifyGraphQl';
-import * as shopifyServices from './shopifyServices';
-import {createScripttag} from '../helpers/utils/createScripttag';
+import {addDefaultSettings, deleteSetting} from '../repositories/settingsRepository';
+import {deleteNotifications} from '../repositories/notificationsRepository';
+import {syncNotifications} from './shopifyGraphQl';
 
-export async function afterInstall(ctx) {
+export async function installService(ctx) {
   try {
-    const shopDomain = ctx.state.shopify.shop;
-    const {id} = await getShopByShopifyDomain(shopDomain);
-    const shop = await getShopById(id);
-    const shopify = initShopify(shop);
-    const scriptTags = await shopify.scriptTag.list();
-    console.log('scriptTags', scriptTags);
+    const {shop: shopifyDomain, accessToken} = ctx.state.shopify;
+    const {id: shopId} = await getShopByShopifyDomain(shopifyDomain);
+    const shopify = initShopify({shopifyDomain, accessToken});
     await resolveAll([
-      // shopifyGraphQl.syncNotifications(shop),
-      shopifyServices.syncNotifications({shopify, shop}),
-      addDefaultSettings(shop),
+      syncNotifications({shopId, shopifyDomain, accessToken}),
+      addDefaultSettings(shopId),
       createWebhookOrder(shopify)
-      // createScripttag(shopify)
     ]);
   } catch (error) {
-    console.error('error', error);
+    console.error('Error Install Service: ', error);
+  }
+}
+
+export async function uninstallService(ctx) {
+  try {
+    const shopDomain = ctx.state.shopify.shop;
+    const {id: shopId} = await getShopByShopifyDomain(shopDomain);
+
+    await resolveAll([deleteNotifications(shopId)], deleteSetting(shopId));
+
+    return (ctx.body = {
+      success: true
+    });
+  } catch (error) {
+    ctx.status = 500;
+    return (ctx.body = {
+      success: false,
+      message: error.message
+    });
   }
 }

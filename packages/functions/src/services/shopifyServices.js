@@ -1,6 +1,6 @@
 import {addNotifications} from '../repositories/notificationsRepository';
 
-export async function syncNotifications({shopify, shop}) {
+export async function syncNotifications({shopify, shopifyDomain, shopId}) {
   try {
     const orders = await shopify.order.list({limit: 30});
     const listProductIds = orders.map(order => order.line_items[0].product_id);
@@ -21,8 +21,8 @@ export async function syncNotifications({shopify, shop}) {
         productName: matchingProduct.title || '',
         productId: lineItems?.product_id || '',
         productImage: matchingProduct?.image?.src || '',
-        shopifyDomain: shop.shopifyDomain || '',
-        shopId: shop.id || ''
+        shopifyDomain: shopifyDomain || '',
+        shopId: shopId || ''
       };
     });
 

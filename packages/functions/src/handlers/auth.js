@@ -44,7 +44,8 @@ app.use(
     },
     hostName: appConfig.baseUrl,
     isEmbeddedApp: true,
-    afterInstall: installationServices.afterInstall,
+    afterInstall: installationServices.installService,
+    afterUninstall: installationServices.uninstallService,
     afterThemePublish: ctx => {
       // Publish assets when theme is published or changed here
       return (ctx.body = {

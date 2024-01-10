@@ -56,12 +56,20 @@ export async function updateSettingsRepo(settings) {
  * @param {*} shop
  * @returns {Settings}
  */
-export async function addDefaultSettings(shop) {
+export async function addDefaultSettings(shopId) {
   try {
-    const shopId = shop.id;
     return collection.add({...defaultSettings, shopId});
   } catch (error) {
     console.error(error);
     return null;
   }
+}
+
+export async function deleteSetting(shopId) {
+  const setting = await collection
+    .where('shopId', '==', shopId)
+    .limit(1)
+    .get();
+
+  return await setting.docs[0].ref.delete();
 }

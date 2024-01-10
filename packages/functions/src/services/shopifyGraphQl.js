@@ -1,39 +1,38 @@
 import {addNotifications} from '../repositories/notificationsRepository';
 const axios = require('axios');
 
-export async function syncNotifications(shop) {
+export async function syncNotifications({shopId, shopifyDomain, accessToken}) {
   try {
-    const {id: shopId, shopifyDomain, accessToken} = shop;
     const query = `{
-      orders(first: 30 , sortKey: CREATE_AT , reverse:true) {
-        edges {
-          node {
-            id
-            createdAt
-            shippingAddress {
+        orders(first: 30 , sortKey: CREATED_AT , reverse: true) {
+          edges {
+            node {
               id
-              firstName
-              city
-              country
-            }
-            lineItems(first:1){
-              edges{
-                node{
-                  product{
-                    id
-                    title
-                    handle
-                  }
-                  image{
-                    url
+              createdAt
+              shippingAddress {
+                id
+                firstName
+                city
+                country
+              }
+              lineItems(first:1){
+                edges{
+                  node{
+                    product{
+                      id
+                      title
+                      handle
+                    }
+                    image{
+                      url
+                    }
                   }
                 }
               }
             }
           }
         }
-      }
-    }`;
+      }`;
     const url = `https://${shopifyDomain}/admin/api/2023-10/graphql.json`;
     const response = await axios.post(
       url,
@@ -46,11 +45,11 @@ export async function syncNotifications(shop) {
       }
     );
 
-    const orderList = response.data.data.orders.edges;
+    const orderList = response.data.data.orders?.edges || [];
 
     const results = orderList.map(order => {
-      const {shippingAddress, lineItems, createdAt, id} = order?.node;
-      const {product, image} = lineItems?.edges[0]?.node;
+      const {shippingAddress, lineItems, createdAt, id} = order?.node || {};
+      const {product, image} = lineItems?.edges[0]?.node || {};
 
       return {
         orderId: Number(id.split('/').slice(-1)[0]) || '',
@@ -65,7 +64,6 @@ export async function syncNotifications(shop) {
         shopId: shopId || ''
       };
     });
-    // console.log('results', results);
     await addNotifications(results);
   } catch (error) {
     console.error('Error shopify graphql:', error.message);

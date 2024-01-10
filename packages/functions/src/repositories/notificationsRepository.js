@@ -81,3 +81,10 @@ export async function deleteManyNotification(notificationsId) {
 
   await batch.commit();
 }
+
+export async function deleteNotifications(shopId) {
+  const notifications = await collection.where('shopId', '==', shopId).get();
+  const promises = notifications.docs.map(doc => doc.ref.delete());
+
+  return await Promise.all(promises);
+}
